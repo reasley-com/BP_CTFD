@@ -5,12 +5,12 @@ metadata:
 spec:
   containers:
   - name: net0
-    images: reasleycom/ctf:2.0
-  env:
-  - name: flag
-    value: "flag{random_login_success}"
-  ports:
-  - containerPort: 80
+    image: reasleycom/ctf:2.0
+    env:
+    - name: flag
+      value: "flag{random_login_success}"
+    ports:
+    - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -23,4 +23,4 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 80
+    nodePort: 31000
