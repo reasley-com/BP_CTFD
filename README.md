@@ -1,3 +1,3 @@
 # BP_ctfd
 
-kubectl apply -k .
+<pre>kubectl apply -k web_version2_deploy.yaml</pre
