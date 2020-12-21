@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: net0
+spec:
+  containers:
+  - name: net0
+    images: reasleycom/ctf:2.0
+  env:
+  - name: flag
+    value: "flag{random_login_success}"
+  ports:
+  - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: net0
+spec:
+  type: LoadBalancer
+  selector:
+    prob: net0
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 80
