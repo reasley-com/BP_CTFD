@@ -1,25 +1,40 @@
-apiVersion: v1
-kind: Pod
+
+# gedit web_deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: net0
+  name: web0
+  namespace: web
+  labels:
+    prob: web0
 spec:
-  containers:
-  - name: net0
-    image: reasleycom/ctf:2.0
-    env:
-    - name: flag
-      value: "flag{random_login_success}"
-    ports:
-    - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      prob: web0
+  template:
+    metadata:
+      labels:
+        prob: web0
+    spec:
+      containers:
+      - name: web0
+        image: 192.168.0.32/ctf:3.0
+        env:
+        - name: flag
+          value: "flag{random_login_success}"
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: net0
+  name: web0
+  namespace: web
 spec:
   type: LoadBalancer
   selector:
-    prob: net0
+    prob: web0
   ports:
     - port: 80
       targetPort: 80
