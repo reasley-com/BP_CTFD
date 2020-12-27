@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,18 +37,20 @@
                     <div style="margin: 0 auto; text-align: center;">
                     <?php
                         include("flag.php");
-                        session_start();
-
-                        srand(rand(0,1000));
+                        srand(rand(0,10));
                         
-                        echo "<h5>first: ".rand(0,1000)."</h5><br>";
-                        echo "<h5>second: ".rand(0,1000)."</h5><br>";
-                        echo "<h5>third: ".rand(0,1000)."</h5><br>";
+                        echo "<h5>first: ".$_SESSION['code']."</h5><br>";
+                        echo "<h5>second: ".$_SESSION['code2']."</h5><br>";
+                        echo "<h5>third: ".$_SESSION['code3']."</h5><br>";
                     
                         if(isset($_GET['code'])){
                             if(isset($_GET['code']) && intval($_GET['code'])===$_SESSION['code'])die($flag);                            
                             else{echo "wrong answer!";}
                         }
+                        
+                        $_SESSION['code3'] = $_SESSION['code2'];
+                        $_SESSION['code2'] = $_SESSION['code'];
+                        $_SESSION['code'] = rand(0,10);
                     ?>    
                     </div>
 
